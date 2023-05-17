@@ -1,0 +1,100 @@
+\documentclass[french,12pt]{article}
+\usepackage{graphicx} % Pour afficher des images
+\usepackage[utf8]{inputenc} % Pour pouvoir utiliser é dans le fichier source
+\usepackage[T1]{fontenc} % Pour afficher é dans le fichier de sortie
+\usepackage[french]{babel} % Travailler en français
+% \usepackage[cyr]{aeguill} Peut-être utile pour les guillemets
+
+\usepackage[top=3cm,bottom=3cm,left=2.75cm,right=2.75cm]{geometry} % Pour modifier les marges
+
+\usepackage{amssymb} % Symboles de maths classiques
+\usepackage{mathtools} % Belles équations
+%\usepackage{dsfont} % Pour avoir l'indicaitrce  \mathds{1}
+%\usepackage{cases} % Taille des fractions dans les accolades
+\usepackage{stmaryrd} % Pour avoir les interval d'entier : llbracket rrbracket 
+\usepackage{empheq}%Pour encadrer sur plusieurs lignes dans un align
+
+
+\usepackage[colorlinks, citecolor=black, filecolor=black, linkcolor=black, urlcolor=black]{hyperref} %% Pour qu'on puisse clicker sur figure~\ref dans le text et que ça amène à la figure en question
+
+\addto\captionsfrench{\def\tablename{Tableau}} % Pour que les tableaux s'appellent des tableaux
+
+\usepackage{caption}
+\captionsetup{justification=centering} %Pour que les titres soient centrés 
+
+\usepackage{multirow} % Pour fusionner les lignes dans les tableaux
+\usepackage{tabularx} % Pour avoir des colonnes de même largeur
+\usepackage{diagbox} % Pour avoir la barre diagonale
+
+%% Tout ca c'est pour avoir des points dans la table des matières pour les sections dans une classe article
+
+\usepackage{tocloft}
+\renewcommand\cftsecfont{\normalfont}
+\renewcommand\cftsecpagefont{\normalfont}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftsecdotsep}}
+\renewcommand\cftsecdotsep{\cftdot}
+\renewcommand\cftsubsecdotsep{\cftdot}
+
+
+%\renewcommand{\thesection}{\Roman{section}}  % Pour que les sections soient des chiffres romains
+
+%\usepackage{karnaugh-map} % Pour les tables de Karnaugh 
+
+
+\begin{document}
+\noindent On a la problème d'optimisation suivant :
+\begin{align*}
+    (\mathcal{P})
+    \begin{dcases}
+        \min&\frac{1}{2}\|\boldsymbol{V}\|^2\\
+        \text{tel que} &\boldsymbol{\nabla} f_i(x)^T\boldsymbol{V}\leqslant -\|\ \boldsymbol{\nabla} f_i(x)\| \quad\forall i\in\llbracket1,m\rrbracket
+    \end{dcases}
+\end{align*}
+\textit{On souhaite le reformuler en utilisant le problème dual :}\\
+Soient $\lambda_1^*,\ldots,\lambda_m^*\geqslant0$ les multiplicateurs de Lagrange optimaux au point $\boldsymbol{x}^*$ (où $\boldsymbol{x}^*$ est une solution $\left(\mathcal{P}\right)$). On considérera la notation : $\boldsymbol{V}(\boldsymbol{x}^*)=\boldsymbol{V}^*$.\\
+On a les conditions de Karush-Kuhn-Tucker suivantes :
+\begin{align}
+    &\boldsymbol{V}^*+\sum_{i=1}^m\lambda_i^*\boldsymbol{\nabla} f_i(x^*)=0\nonumber\\\nonumber\\
+    &\boldsymbol{\nabla} f_i(x^*)^T\boldsymbol{V}^*+\|\boldsymbol{\nabla} f_i(x^*)\|\leqslant0&i\in\llbracket1,m\rrbracket\nonumber\\\nonumber\\
+    &\sum_{i=1}^m\lambda^*_i=1,\quad \lambda_i^*\geqslant0&i\in\llbracket1,m\rrbracket\nonumber\\\nonumber\\
+    &\lambda_i\left(\boldsymbol{\nabla} f_i(x^*)^T\boldsymbol{V}^*+\|\boldsymbol{\nabla} f_i(x^*)\|\right)=0&i\in\llbracket1,m\rrbracket\label{eq:1}
+\end{align}
+On a directement :
+\begin{equation}
+    \label{eq:2}
+    \boldsymbol{V}^*=-\sum_{i=1}^m\lambda_i^*\boldsymbol{\nabla} f_i(x^*)\\
+\end{equation}
+\begin{equation*}
+    \sum_{i=1}^m\lambda^*_i=1
+\end{equation*}
+En sommant \eqref{eq:1} sur $i$, et en utilisant \eqref{eq:2} :
+\begin{align*}
+    \sum_{i=1}^m\left(\lambda_i\left(\boldsymbol{\nabla} f_i(x^*)^T\boldsymbol{V}^*+\|\boldsymbol{\nabla} f_i(x^*)\|\right)\right)&=0\\
+     \sum_{i=1}^m\lambda_i\|\boldsymbol{\nabla} f_i(x^*)\|&=\|\boldsymbol{V}^*\|^2
+\end{align*}
+Le Lagrangien de $(\mathcal{P})$ est :
+\begin{equation*}
+    L(\boldsymbol{V},\boldsymbol{\lambda})=\frac{1}{2}\|\boldsymbol{V}\|^2+\sum_{i=1}^m\lambda_i\left(\boldsymbol{\nabla} f_i(x)^T\boldsymbol{V}+\|\boldsymbol{\nabla} f_i(x)\|\right)
+\end{equation*}
+On a le problème dual :
+\begin{align*}
+    \max_{\lambda\geqslant0}\inf_{\boldsymbol{V}\in\mathbb{R}^n}L(\boldsymbol{V},\boldsymbol{\lambda})&=L(\boldsymbol{V}^*,\boldsymbol{\lambda}^*)\\
+    &=\frac{1}{2}\|\boldsymbol{V}^*\|^2+\sum_{i=1}^m\lambda_i^*\left(\boldsymbol{\nabla} f_i(x)^T\boldsymbol{V}^*+\|\boldsymbol{\nabla} f_i(x)\|\right)\\
+    &=\frac{3}{2}\|\boldsymbol{V}^*\|^2+\sum_{i=1}^m\lambda_i^*\boldsymbol{\nabla} f_i(x)^T\boldsymbol{V}^*\\
+    &=\frac{3}{2}\|\boldsymbol{V}^*\|^2-\|\boldsymbol{V}^*\|^2\\
+    &=\frac{1}{2}\|\boldsymbol{V}^*\|^2\\
+    &=\frac{1}{2}\left\|\sum_{i=1}^m\lambda_i^*\boldsymbol{\nabla} f_i(x)\right\|^2
+\end{align*}
+On peut alors écrire un problème équivalent à $(\mathcal{P})$ :
+\begin{empheq}[box=\fbox]{align*}
+    (\mathcal{P'})
+    \begin{dcases}
+        \max&\left\|\sum_{i=1}^m\lambda_i^*\boldsymbol{\nabla} f_i(x)\right\|^2\\\\
+        \text{tel que}
+        &\begin{array}{l}
+            \displaystyle\sum_{i=1}^m\lambda^*_i=1  \\\\
+            \lambda_i^*\geqslant0,\quad i\in\llbracket1,m\rrbracket
+        \end{array}
+    \end{dcases}
+\end{empheq}
+\end{document}

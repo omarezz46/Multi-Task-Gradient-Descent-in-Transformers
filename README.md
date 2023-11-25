@@ -31,10 +31,10 @@ Our multi-task gradient descent approach is based on an ongoing paper from a res
 
 We evaluate our model on the MIMIC-IV database and compare it to other models, including standard RNN models which are considered as the state-of-the-art in health time series analysis. The results show that our model outperforms the other models in terms of prediction accuracy and anomaly detection. Our model is also able to perform multiple tasks simultaneously, such as prediction and classification, classification and regularization etc. Below are some of the results obtained from our model when trained for sepsis diagnosis and mortality prediction.
 <div style="display: flex;">
-    <div style="flex: 50%; padding: 5px;">
+    <div style="flex: 50%; padding: 2px;">
         <img src="atteintornot.png" alt="Alt Text" style="width: 100%;">
     </div>
-    <div style="flex: 50%; padding: 5px;">
+    <div style="flex: 50%; padding: 2px;">
         <img src="duration.png" alt="Alt Text" style="width: 100%;">
     </div>
 </div>

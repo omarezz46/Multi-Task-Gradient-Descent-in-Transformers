@@ -24,7 +24,7 @@ The model architecture used in this project is based on the transformer encoder.
 
 ## Multi-Task Gradient Descent
 
-Our multi-task gradient descent approach is based on an ongoing paper from a research group at the University of Paris-Saclay with whom we worked throughout the project. The paper is still not available but the main idea is 
+Our multi-task gradient descent approach is based on an ongoing paper from a research group at the University of Paris-Saclay with whom we worked throughout the project. The paper is still not available.
 
 
 ## Results
